@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Check</title>
+</head>
+<body>
+  <h2>Enter Password</h2>
+  <form id="passwordForm">
+    <input type="password" id="password" placeholder="Enter password" required />
+    <button type="submit">Submit</button>
+  </form>
+  <p id="message"></p>
+
+  <script>
+    const form = document.getElementById("passwordForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const password = document.getElementById("password").value;
+
+      const res = await fetch("https://password-backend-zeta.vercel.app/api/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await res.json();
+      message.textContent = data.message;
+    });
+  </script>
+</body>
+</html>
