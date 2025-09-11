@@ -13,7 +13,7 @@
   </form>
   <p id="message"></p>
 
- <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("passwordForm");
 
@@ -28,16 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ password }),
       });
 
-      const html = await res.text(); // get raw HTML
-      const a = document.open("about:blank");
-      a.document.write(html); // replace the whole page
-      a.document.close();
+      const html = await res.text();
+
+      // Open a new blank tab/window and inject HTML
+      const newWindow = window.open("about:blank");
+      newWindow.document.open();
+      newWindow.document.write(html);
+      newWindow.document.close();
     } catch (err) {
       alert("⚠️ Something went wrong: " + err.message);
     }
   });
 });
 </script>
+
 
 
 
