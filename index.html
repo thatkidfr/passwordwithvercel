@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const html = await res.text(); // get raw HTML
-      document.open();
-      document.write(html); // replace the whole page
-      document.close();
+      const a = document.open("about:blank");
+      a.document.write(html); // replace the whole page
+      a.document.close();
     } catch (err) {
       alert("⚠️ Something went wrong: " + err.message);
     }
